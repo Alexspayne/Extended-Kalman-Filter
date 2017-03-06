@@ -1,7 +1,4 @@
-# Extended Kalman Filter Project Starter Code
-Self-Driving Car Engineer Nanodegree Program
-
----
+# Extended Kalman Filter Project
 
 ## Dependencies
 
@@ -25,66 +22,46 @@ Self-Driving Car Engineer Nanodegree Program
    some sample inputs in 'data/'.
     - eg. `./ExtendedKF ../data/sample-laser-radar-measurement-data-1.txt output.txt`
 
-## Editor Settings
+# Rubric Points
+I explain how I met each of the specifications in the project rubric.
 
-We've purposefully kept editor configuration files out of this repo in order to
-keep it as simple and environment agnostic as possible. However, we recommend
-using the following settings:
+## Compiling
+### Your code should compile.
+It compiles.
 
-* indent using spaces
-* set tab width to 2 spaces (keeps the matrices in source code aligned)
+## Accuracy
+### The px, py output coordinates have an RMSE <= [0.8, 0.8, 0.26, 0.28] compared to the ground truth.
 
-## Code Style
+My RMSE was <Insert result here>.
 
-Please (do your best to) stick to [Google's C++ style guide](https://google.github.io/styleguide/cppguide.html).
+## Follows the Correct Algorithm
 
-## Generating Additional Data
+### Your Sensor Fusion algorithm follows the general processing flow as taught in the preceding lessons.
 
-This is optional!
 
-If you'd like to generate your own radar and lidar data, see the
-[utilities repo](https://github.com/udacity/CarND-Mercedes-SF-Utilities) for
-Matlab scripts that can generate additional data.
+### Your Kalman Filter algorithm handles the first measurements appropriately.
 
-## Project Instructions and Rubric
 
-Note: regardless of the changes you make, your project must be buildable using
-cmake and make!
+  * Your algorithm should use the first measurements to initialize the state and covariance matrices.
 
-More information is only accessible by people who are already enrolled in Term 2
-of CarND. If you are enrolled, see [the project page](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/12dd29d8-2755-4b1b-8e03-e8f16796bea8)
-for instructions and the project rubric.
+### Your Kalman Filter algorithm first predicts then updates.
 
-## Hints!
 
-* You don't have to follow this directory structure, but if you do, your work
-  will span all of the .cpp files here. Keep an eye out for TODOs.
+  * Upon receiving a measurement after the first, the algorithm should predict object position to the current timestep and then update the prediction using the new measurement.
 
-## Call for IDE Profiles Pull Requests
+### Your Kalman Filter can handle radar and lidar measurements.
 
-Help your fellow students!
+## Code Efficiency
 
-We decided to create Makefiles with cmake to keep this project as platform
-agnostic as possible. Similarly, we omitted IDE profiles in order to we ensure
-that students don't feel pressured to use one IDE or another.
+### Your algorithm should avoid unnecessary calculations.
 
-However! I'd love to help people get up and running with their IDEs of choice.
-If you've created a profile for an IDE that you think other students would
-appreciate, we'd love to have you add the requisite profile files and
-instructions to ide_profiles/. For example if you wanted to add a VS Code
-profile, you'd add:
+Avoid:
 
-* /ide_profiles/vscode/.vscode
-* /ide_profiles/vscode/README.md
 
-The README should explain what the profile does, how to take advantage of it,
-and how to install it.
+  * Running the exact same calculation repeatedly when you can run it once, store the value and then reuse the value later.
 
-Frankly, I've never been involved in a project with multiple IDE profiles
-before. I believe the best way to handle this would be to keep them out of the
-repo root to avoid clutter. My expectation is that most profiles will include
-instructions to copy files to a new location to get picked up by the IDE, but
-that's just a guess.
+  * Loops that run too many times.
 
-One last note here: regardless of the IDE used, every submitted project must
-still be compilable with cmake and make.
+  * Creating unnecessarily complex data structures when simpler structures work equivalently.
+
+  * Unnecessary control flow checks.
