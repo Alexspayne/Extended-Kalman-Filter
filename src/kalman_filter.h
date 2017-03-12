@@ -6,8 +6,7 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 
 class KalmanFilter {
-public:
-
+ public:
   // state vector
   VectorXd x_;
 
@@ -66,8 +65,6 @@ public:
    * @param z The measurement at k+1
    */
   void UpdateEKF(const VectorXd &z);
-
-
 };
 
 #endif /* KALMAN_FILTER_H_ */
