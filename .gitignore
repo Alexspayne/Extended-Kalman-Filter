@@ -6,3 +6,6 @@ build/
 
 # editor config
 .vscode/
+
+# Jupyter
+.ipynb_checkpoints

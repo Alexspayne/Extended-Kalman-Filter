@@ -42,7 +42,9 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     * update the state by using Extended Kalman Filter equations
   */
   // It's going to be mostly the same.
-          VectorXd z_pred = H_ * x_;
+  // But this will be used for radar measurements.
+  // So I'll use the Jacobian matrix.
+        VectorXd z_pred = H_ * x_;
         VectorXd y = z - z_pred;
         MatrixXd Ht = H_.transpose();
         MatrixXd S = H_ * P_ * Ht + R_;
@@ -56,3 +58,5 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
         MatrixXd I = MatrixXd::Identity(x_size, x_size);
         P_ = (I - K * H_) * P_;
 }
+
+
