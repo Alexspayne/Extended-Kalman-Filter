@@ -9,3 +9,8 @@ build/
 
 # Jupyter
 .ipynb_checkpoints
+
+# Emacs
+
+*~*
+*#*

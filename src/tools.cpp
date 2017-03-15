@@ -73,3 +73,34 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
 
   return Hj;
 }
+
+
+MatrixXd Tools::h(const VectorXd& x_state) {
+  /**
+  TODO:
+    * Calculate a Jacobian here.
+  */
+  // This code was given in the lesson
+  VectorXd polar_state_vector(3);
+  // recover state parameters
+  float px = x_state(0);
+  float py = x_state(1);
+  float vx = x_state(2);
+  float vy = x_state(3);
+
+  // pre-compute a set of terms to avoid repeated calculation
+  float c1 = px*px+py*py;
+  float c2 = sqrt(c1);
+
+  // check division by zero
+  if (fabs(c2) < 0.0001) {
+          cout << "h () - Error - Division by Zero" << endl;
+          return polar_state_vector;
+  }
+  // TODO(me): Figure out how to do arctan in C++
+  polar_state_vector << c2,
+      arctan(py/px),
+      (px*vx+py*vy)/c2];
+
+  return polar_state_vector;
+}
