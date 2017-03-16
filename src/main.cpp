@@ -25,7 +25,7 @@ void check_arguments(int argc, char* argv[]) {
     cerr << usage_instructions << endl;
   } else if (argc == 2) {
     cerr << "Please include an output file.\n" << usage_instructions << endl;
-  } else if (argc == 3) {
+  } else if (argc == 6) {
     has_valid_args = true;
   } else if (argc > 3) {
     cerr << "Too many arguments.\n" << usage_instructions << endl;
@@ -63,6 +63,14 @@ int main(int argc, char* argv[]) {
   vector<GroundTruthPackage> gt_pack_list;
 
   string line;
+
+  // Noise parameters
+  float noise_l;
+  noise_l = atof(argv[3]);
+  float noise_r;
+  noise_r = atof(argv[4]);
+  float noise_process;
+  noise_process = atof(argv[5]);
 
   // prep the measurement packages (each line represents a measurement at a
   // timestamp)
@@ -122,7 +130,7 @@ int main(int argc, char* argv[]) {
   }
 
   // Create a Fusion EKF instance
-  FusionEKF fusionEKF;
+  FusionEKF fusionEKF(noise_l, noise_r, noise_process);
 
   // used to compute the RMSE later
   vector<VectorXd> estimations;

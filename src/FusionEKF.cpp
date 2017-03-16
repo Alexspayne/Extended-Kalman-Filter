@@ -11,7 +11,8 @@ using std::vector;
 /*
  * Constructor.
  */
-FusionEKF::FusionEKF() {
+FusionEKF::FusionEKF(float const noise_r, float const noise_l,
+                     float const noise_process) {
   is_initialized_ = false;
 
   previous_timestamp_ = 0;
@@ -28,21 +29,21 @@ FusionEKF::FusionEKF() {
 
   // state covariance matrix P
   ekf_.P_ = MatrixXd(4, 4);
-  ekf_.P_ << 1, 0, 0, 0,
-                    0, 1, 0, 0,
-                    0, 0, 1000, 0,
-                    0, 0, 0, 1000;
+  // ekf_.P_ << 1, 0, 0, 0,
+  //                   0, 1, 0, 0,
+  //                   0, 0, 1000, 0,
+  //                   0, 0, 0, 1000;
 
 
   // measurement covariance
   ekf_.R_laser_ = MatrixXd(2, 2);
-  ekf_.R_laser_ << 0.0000409, 0,
-                    0, 0.0000409;
+  ekf_.R_laser_ << noise_l, 0,
+                    0, noise_l;
 
   ekf_.R_radar_ = MatrixXd(3, 3);
-  ekf_.R_radar_ << 0.0000409, 0, 0,
-      0, 0.0000409 , 0,
-      0, 0, 0.0000409;
+  ekf_.R_radar_ << noise_r, 0, 0,
+      0, noise_r , 0,
+      0, 0, noise_r;
 
 
   // measurement matrix
@@ -58,8 +59,8 @@ FusionEKF::FusionEKF() {
                     0, 0, 0, 1;
 
   // set the acceleration noise components
-  noise_ax = .162;
-  noise_ay = .162;
+  noise_ax = noise_process;
+  noise_ay = noise_process;
 }
 
 /**

@@ -13,7 +13,8 @@ public:
   /**
   * Constructor.
   */
-  FusionEKF();
+  FusionEKF(float const noise_r, float const noise_l,
+            float const noise_process);
 
   /**
   * Destructor.
@@ -29,7 +30,7 @@ public:
   * Kalman Filter update and prediction math lives in here.
   */
   float noise_ax;
-  float noise_ay;  
+  float noise_ay;
   KalmanFilter ekf_;
 
 private:
