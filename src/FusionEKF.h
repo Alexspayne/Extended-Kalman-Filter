@@ -41,9 +41,6 @@ private:
 
   // tool object used to compute Jacobian and RMSE
   Tools tools;
-  MatrixXd R_laser_;
-  MatrixXd R_radar_;
-  MatrixXd H_laser_;
   MatrixXd Hj_;
 };
 

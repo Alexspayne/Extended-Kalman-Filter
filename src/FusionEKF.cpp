@@ -35,19 +35,19 @@ FusionEKF::FusionEKF() {
 
 
   // measurement covariance
-  R_laser_ = MatrixXd(2, 2);
-  R_laser_ << 0.0000409, 0,
+  ekf_.R_laser_ = MatrixXd(2, 2);
+  ekf_.R_laser_ << 0.0000409, 0,
                     0, 0.0000409;
 
-  R_radar_ = MatrixXd(3, 3);
-  R_radar_ << 0.0000409, 0, 0,
+  ekf_.R_radar_ = MatrixXd(3, 3);
+  ekf_.R_radar_ << 0.0000409, 0, 0,
       0, 0.0000409 , 0,
       0, 0, 0.0000409;
 
 
   // measurement matrix
-  H_laser_ = MatrixXd(2, 4);
-  H_laser_ << 1, 0, 0, 0,
+  ekf_.H_laser_ = MatrixXd(2, 4);
+  ekf_.H_laser_ << 1, 0, 0, 0,
                     0, 1, 0, 0;
 
   // the initial transition matrix F_

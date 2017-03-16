@@ -24,7 +24,6 @@ void KalmanFilter::Predict() {
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
-
         VectorXd z_pred = H_laser_ * x_;
         VectorXd y = z - z_pred;
         MatrixXd Ht = H_laser_.transpose();
