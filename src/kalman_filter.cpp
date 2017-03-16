@@ -24,6 +24,7 @@ void KalmanFilter::Predict() {
 }
 
 void KalmanFilter::Update(const VectorXd &z) {
+
         VectorXd z_pred = H_laser_ * x_;
         VectorXd y = z - z_pred;
         MatrixXd Ht = H_laser_.transpose();
@@ -34,7 +35,7 @@ void KalmanFilter::Update(const VectorXd &z) {
 
         // new estimate
         x_ = x_ + (K * y);
-        int64 x_size = x_.size();
+        long x_size = x_.size();
         MatrixXd I = MatrixXd::Identity(x_size, x_size);
         P_ = (I - K * H_laser_) * P_;
 }
@@ -48,7 +49,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z, const MatrixXd &Hj_) {
   // But this will be used for radar measurements.
   // So I'll use the Jacobian matrix.
   // Also, the measurement vector z has a different shape.
-        VectorXd z_pred << Tools::h(x_);
+        VectorXd z_pred = tools.h(x_);
         VectorXd y = z - z_pred;
         MatrixXd Ht = Hj_.transpose();
         MatrixXd S = Hj_ * P_ * Ht + R_radar_;
@@ -58,7 +59,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z, const MatrixXd &Hj_) {
 
         // new estimate
         x_ = x_ + (K * y);
-        int64 x_size = x_.size();
+        long x_size = x_.size();
         MatrixXd I = MatrixXd::Identity(x_size, x_size);
         P_ = (I - K * Hj_) * P_;
 }

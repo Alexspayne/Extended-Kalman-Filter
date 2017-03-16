@@ -17,7 +17,7 @@ FusionEKF::FusionEKF() {
   previous_timestamp_ = 0;
 
   // initializing matrices
-  ekf_.Hj_ = MatrixXd(3, 4);
+  Hj_ = MatrixXd(3, 4);
 
   /**
   TODO:
@@ -35,19 +35,19 @@ FusionEKF::FusionEKF() {
 
 
   // measurement covariance
-  ekf_.R_laser_ = MatrixXd(2, 2);
-  ekf_.R_laser_ << 0.0000409, 0,
+  R_laser_ = MatrixXd(2, 2);
+  R_laser_ << 0.0000409, 0,
                     0, 0.0000409;
 
-  ekf_.R_radar_ = MatrixXd(3, 3);
-  ekf_.R_radar_ << 0.0000409, 0, 0,
+  R_radar_ = MatrixXd(3, 3);
+  R_radar_ << 0.0000409, 0, 0,
       0, 0.0000409 , 0,
       0, 0, 0.0000409;
 
 
   // measurement matrix
-  ekf_.H_laser_ = MatrixXd(2, 4);
-  ekf_.H_laser << 1, 0, 0, 0,
+  H_laser_ = MatrixXd(2, 4);
+  H_laser_ << 1, 0, 0, 0,
                     0, 1, 0, 0;
 
   // the initial transition matrix F_
@@ -152,7 +152,7 @@ void FusionEKF::ProcessMeasurement(const MeasurementPackage &measurement_pack) {
     // Radar updates
     // Calculate the Jacobian
     MatrixXd Hj_ = MatrixXd(3, 4);
-    Hj_ << Tools::CalculateJacobian(ekf_.x_);
+    Hj_ << tools.CalculateJacobian(ekf_.x_);
     ekf_.UpdateEKF(measurement_pack.raw_measurements_, Hj_);
   } else {
     // Laser updates

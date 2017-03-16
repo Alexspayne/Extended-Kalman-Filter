@@ -1,5 +1,6 @@
 #include <iostream>
 #include "tools.h"
+#include "math.h"
 
 Tools::Tools() {}
 
@@ -99,8 +100,8 @@ MatrixXd Tools::h(const VectorXd& x_state) {
   }
   // TODO(me): Figure out how to do arctan in C++
   polar_state_vector << c2,
-      arctan(py/px),
-      (px*vx+py*vy)/c2];
+      atan2(py, px),
+      (px*vx+py*vy)/c2;
 
   return polar_state_vector;
 }

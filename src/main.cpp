@@ -71,7 +71,7 @@ int main(int argc, char* argv[]) {
     MeasurementPackage meas_package;
     GroundTruthPackage gt_package;
     istringstream iss(line);
-    int64 timestamp;
+    long timestamp;
 
     // reads first element from the current line
     iss >> sensor_type;
@@ -146,7 +146,7 @@ int main(int argc, char* argv[]) {
       // output the estimation
       out_file_ << measurement_pack_list[k].raw_measurements_(0) << "\t";
       out_file_ << measurement_pack_list[k].raw_measurements_(1) << "\t";
-    } else if (measurement_pack_list[k].sensor_type
+    } else if (measurement_pack_list[k].sensor_type_
                == MeasurementPackage::RADAR) {
       // output the estimation in the cartesian coordinates
       float ro = measurement_pack_list[k].raw_measurements_(0);

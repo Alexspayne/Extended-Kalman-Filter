@@ -28,6 +28,8 @@ public:
   /**
   * Kalman Filter update and prediction math lives in here.
   */
+  float noise_ax;
+  float noise_ay;  
   KalmanFilter ekf_;
 
 private:
@@ -45,4 +47,4 @@ private:
   MatrixXd Hj_;
 };
 
-#endif /* FusionEKF_H_ */
+#endif  // SRC_FUSIONEKF_H_
