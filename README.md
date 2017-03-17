@@ -23,21 +23,37 @@
     - eg. `./ExtendedKF ../data/sample-laser-radar-measurement-data-1.txt output.txt`
 
 # Rubric Points
-I explain how I met each of the specifications in the project rubric.
+I will give some detail for how I met some of the specifications.
 
 ## Compiling
 ### Your code should compile.
 It compiles.
 
 ## Accuracy
-### The px, py output coordinates have an RMSE <= [0.8, 0.8, 0.26, 0.28] compared to the ground truth.
+### The px, py output coordinates have an RMSE <= [0.07, 0.07, 0.60, 0.60] when using the file: "sample-laser-radar-measurement-data-1.txt".
 
-My RMSE was <Insert result here>.
+For file 1:
+Accuracy - RMSE:
+0.0692146
+0.0699778
+ 0.504917
+ 0.540752
+
+### The px, py output coordinates have an RMSE <= [0.20, 0.20, .50, .83] when using the file: "sample-laser-radar-measurement-data-2.txt".
+
+For file 2:
+Accuracy - RMSE:
+0.182316
+0.192001
+0.440208
+0.829539
+
 
 ## Follows the Correct Algorithm
 
 ### Your Sensor Fusion algorithm follows the general processing flow as taught in the preceding lessons.
 
+I didn't have to make any modifications.
 
 ### Your Kalman Filter algorithm handles the first measurements appropriately.
 
@@ -50,6 +66,8 @@ My RMSE was <Insert result here>.
   * Upon receiving a measurement after the first, the algorithm should predict object position to the current timestep and then update the prediction using the new measurement.
 
 ### Your Kalman Filter can handle radar and lidar measurements.
+
+It does use both.
 
 ## Code Efficiency
 
