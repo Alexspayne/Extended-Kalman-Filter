@@ -25,7 +25,9 @@ void check_arguments(int argc, char* argv[]) {
     cerr << usage_instructions << endl;
   } else if (argc == 2) {
     cerr << "Please include an output file.\n" << usage_instructions << endl;
-  } else if (argc == 6) {
+    // I change the number of accepted arguments to 6
+    // to pass in noise paramenters.
+  } else if (argc == 3) {
     has_valid_args = true;
   } else if (argc > 3) {
     cerr << "Too many arguments.\n" << usage_instructions << endl;
@@ -66,12 +68,17 @@ int main(int argc, char* argv[]) {
 
   // Noise parameters
   float noise_l;
-  noise_l = atof(argv[3]);
   float noise_r;
-  noise_r = atof(argv[4]);
   float noise_process;
-  noise_process = atof(argv[5]);
 
+  noise_l = 0.000135;
+  noise_r = 0.0001;
+  noise_process = 0.04045;
+  // I use these lines instead if I want to pass in noise parameters
+  // from the command line.
+  // noise_l = atof(argv[3]);
+  // noise_r = atof(argv[4]);
+  // noise_process = atof(argv[5]);
   // prep the measurement packages (each line represents a measurement at a
   // timestamp)
   while (getline(in_file_, line)) {
